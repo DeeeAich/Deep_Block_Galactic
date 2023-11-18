@@ -33,12 +33,12 @@ public class DriverControls : MonoBehaviour
         }
         else if (r == 0)
         {
-            transform.RotateAround(treads[1].transform.position, transform.up, l * rotationSpeed * Time.deltaTime);
+            transform.RotateAround(treads[1].transform.position, transform.up, -l * rotationSpeed * Time.deltaTime);
         }
         else
         {
 
-            transform.Rotate(transform.up, rotationSpeed * 2 * (r > 0 ? -1 : 1) * Time.deltaTime);
+            transform.Rotate(transform.up, rotationSpeed * 2 * (r > 0 ? 1 : -1) * Time.deltaTime);
 
         }
     }
@@ -46,7 +46,7 @@ public class DriverControls : MonoBehaviour
     private void Move(float r, float l)
     {
 
-        GetComponent<Rigidbody>().velocity = transform.forward * (r + l) * Time.deltaTime;
+        GetComponent<Rigidbody>().velocity = transform.forward * (r + l) + new Vector3( 0, GetComponent<Rigidbody>().velocity.y, 0) ;
 
     }
 
