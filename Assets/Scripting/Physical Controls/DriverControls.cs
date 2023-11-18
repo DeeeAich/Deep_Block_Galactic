@@ -12,24 +12,13 @@ public class DriverControls : MonoBehaviour
 
     [SerializeField] float maxSpeedTime = 2;
 
-    float rightStick = 0;
+    [SerializeField] float rightStick = 0;
     float rightTime = 0;
-    float leftStick = 0;
+    [SerializeField] float leftStick = 0;
     float leftTime = 0;
 
     private void Controlling()
     {
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
-            rightTime = 0;
-
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A))
-            leftTime = 0;
-
-        rightTime += Time.deltaTime;
-        leftTime += Time.deltaTime;
-
-        rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
-        leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
 
         if (rightStick == leftStick)
             Move(rightStick);
@@ -43,26 +32,60 @@ public class DriverControls : MonoBehaviour
 
         if (l == 0)
         {
-            transform.RotateAround(treads[0].transform.position, transform.up, r * rotationSpeedMulti * Time.deltaTime);
+            transform.RotateAround(treads[1].transform.position, transform.up, -r * rotationSpeedMulti * Time.deltaTime);
         }
         else if (r == 0)
         {
-            transform.RotateAround(treads[1].transform.position, transform.up, -l * rotationSpeedMulti * Time.deltaTime);
+            transform.RotateAround(treads[0].transform.position, transform.up, l * rotationSpeedMulti * Time.deltaTime);
         }
         else
         {
 
-            float combined = r - l;
+            float rotationMath = 0;
 
-            transform.Rotate(transform.up, combined * rotationSpeedMulti * Time.deltaTime);
+            Vector3 rotationPivot = transform.position;
+
+            if(r > 0 && l > 0|| r < 0 && l < 0)
+            {
+                float percentage = 0;
+
+                if (r > l && r > 0 || r < l && r < 0 )
+                {
+                    percentage = r > 0 ? l / r : -l / -r;
+
+                    rotationMath = -r * (1 - percentage) * 2;
+
+                    Move(l + r * percentage);
+
+                    //rotationPivot += -Vector3.Distance(transform.position, treads[0].transform.position) * transform.right * (1 - percent);
+
+                }
+                else if (r < l && l > 0 ||  r > l && l < 0)
+                {
+
+                    percentage = l > 0 ? r / l : -r / -l;
+
+                    rotationMath = l * (1 - percentage) * 2;
+
+                    Move(r);
+
+                    //rotationPivot += Vector3.Distance(transform.position, treads[0].transform.position) * transform.right * (1 - percent);
+
+                }
+
+            }
+            else
+                rotationMath = l - r;
+
+            transform.RotateAround(rotationPivot, transform.up, rotationMath * rotationSpeedMulti * Time.deltaTime);
 
         }
     }
 
-    private void Move(float r)
+    private void Move(float moveAmount)
     {
 
-        GetComponent<Rigidbody>().velocity = transform.forward * r + new Vector3( 0, GetComponent<Rigidbody>().velocity.y, 0) ;
+        GetComponent<Rigidbody>().velocity = transform.forward * moveAmount + new Vector3( 0, GetComponent<Rigidbody>().velocity.y, 0) ;
 
     }
 
@@ -75,7 +98,23 @@ public class DriverControls : MonoBehaviour
 
     }
 
-    
-    
+    private void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        {
+            rightTime = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A))
+            leftTime = 0;
+
+
+        rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
+        leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
+
+        rightTime += Time.deltaTime;
+        leftTime += Time.deltaTime;
+    }
 
 }

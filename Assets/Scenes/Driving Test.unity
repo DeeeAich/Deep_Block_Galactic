@@ -457,7 +457,9 @@ MonoBehaviour:
   - {fileID: 1870963572}
   speed: 10
   rotationSpeedMulti: 3
-  maxSpeedTime: 2
+  maxSpeedTime: 3
+  rightStick: 0
+  leftStick: 0
 --- !u!1 &971437232
 GameObject:
   m_ObjectHideFlags: 0
