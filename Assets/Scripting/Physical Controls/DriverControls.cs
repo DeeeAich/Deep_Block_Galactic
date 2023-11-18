@@ -8,17 +8,31 @@ public class DriverControls : MonoBehaviour
     [SerializeField] List<GameObject> treads = new();
 
     [SerializeField] float speed = 4;
-    [SerializeField] float rotationSpeed = 15;
+    [SerializeField] float rotationSpeedMulti = 1.5f;
+
+    [SerializeField] float maxSpeedTime = 2;
+
+    float rightStick = 0;
+    float rightTime = 0;
+    float leftStick = 0;
+    float leftTime = 0;
 
     private void Controlling()
     {
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+            rightTime = 0;
 
-        float rightStick = Input.GetAxis("RightStick");
-        float leftStick = Input.GetAxis("LeftStick");
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A))
+            leftTime = 0;
 
+        rightTime += Time.deltaTime;
+        leftTime += Time.deltaTime;
+
+        rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
+        leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
 
         if (rightStick == leftStick)
-            Move(rightStick, leftStick);
+            Move(rightStick);
         else
             Rotate(rightStick, leftStick);
 
@@ -29,24 +43,26 @@ public class DriverControls : MonoBehaviour
 
         if (l == 0)
         {
-            transform.RotateAround(treads[0].transform.position, transform.up, r * rotationSpeed * Time.deltaTime);
+            transform.RotateAround(treads[0].transform.position, transform.up, r * rotationSpeedMulti * Time.deltaTime);
         }
         else if (r == 0)
         {
-            transform.RotateAround(treads[1].transform.position, transform.up, -l * rotationSpeed * Time.deltaTime);
+            transform.RotateAround(treads[1].transform.position, transform.up, -l * rotationSpeedMulti * Time.deltaTime);
         }
         else
         {
 
-            transform.Rotate(transform.up, rotationSpeed * 2 * (r > 0 ? 1 : -1) * Time.deltaTime);
+            float combined = r - l;
+
+            transform.Rotate(transform.up, combined * rotationSpeedMulti * Time.deltaTime);
 
         }
     }
 
-    private void Move(float r, float l)
+    private void Move(float r)
     {
 
-        GetComponent<Rigidbody>().velocity = transform.forward * (r + l) + new Vector3( 0, GetComponent<Rigidbody>().velocity.y, 0) ;
+        GetComponent<Rigidbody>().velocity = transform.forward * r + new Vector3( 0, GetComponent<Rigidbody>().velocity.y, 0) ;
 
     }
 
