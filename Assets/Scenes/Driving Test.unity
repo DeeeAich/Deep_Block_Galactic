@@ -455,9 +455,10 @@ MonoBehaviour:
   treads:
   - {fileID: 1565616475}
   - {fileID: 1870963572}
-  speed: 10
+  treadAnimation: []
+  speed: 15
   rotationSpeedMulti: 3
-  maxSpeedTime: 3
+  maxSpeedTime: 2
   rightStick: 0
   leftStick: 0
 --- !u!1 &971437232

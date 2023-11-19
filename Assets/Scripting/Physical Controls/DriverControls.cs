@@ -6,6 +6,7 @@ public class DriverControls : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> treads = new();
+    [SerializeField] List<Animator> treadAnimation = new();
 
     [SerializeField] float speed = 4;
     [SerializeField] float rotationSpeedMulti = 1.5f;
@@ -112,6 +113,14 @@ public class DriverControls : MonoBehaviour
 
         rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
         leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
+
+        if(treadAnimation.Count == 2)
+        {
+            treadAnimation[1].speed = rightStick / speed;
+            treadAnimation[1].SetFloat("Rotation", rightStick);
+            treadAnimation[0].speed = leftStick / speed;
+            treadAnimation[0].SetFloat("Rotation", leftStick);
+        }
 
         rightTime += Time.deltaTime;
         leftTime += Time.deltaTime;
