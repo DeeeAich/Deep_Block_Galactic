@@ -18,6 +18,8 @@ public class DriverControls : MonoBehaviour
     [SerializeField] float leftStick = 0;
     float leftTime = 0;
 
+    [SerializeField] float turningPointAddition = 0.5f;
+
     private void Controlling()
     {
 
@@ -33,11 +35,11 @@ public class DriverControls : MonoBehaviour
 
         if (l == 0)
         {
-            transform.RotateAround(treads[1].transform.position, transform.up, -r * rotationSpeedMulti * Time.deltaTime);
+            transform.RotateAround(treads[1].transform.position + -transform.right * turningPointAddition, transform.up, -r * rotationSpeedMulti * Time.deltaTime) ;
         }
         else if (r == 0)
         {
-            transform.RotateAround(treads[0].transform.position, transform.up, l * rotationSpeedMulti * Time.deltaTime);
+            transform.RotateAround(treads[0].transform.position + transform.right * turningPointAddition, transform.up, l * rotationSpeedMulti * Time.deltaTime);
         }
         else
         {
@@ -56,9 +58,9 @@ public class DriverControls : MonoBehaviour
 
                     rotationMath = -r * (1 - percentage) * 2;
 
-                    Move(l + r * percentage);
+                    Move(l);
 
-                    //rotationPivot += -Vector3.Distance(transform.position, treads[0].transform.position) * transform.right * (1 - percent);
+                    rotationPivot = treads[1].transform.position * turningPointAddition * 2 ;
 
                 }
                 else if (r < l && l > 0 ||  r > l && l < 0)
@@ -70,7 +72,7 @@ public class DriverControls : MonoBehaviour
 
                     Move(r);
 
-                    //rotationPivot += Vector3.Distance(transform.position, treads[0].transform.position) * transform.right * (1 - percent);
+                    rotationPivot = treads[0].transform.position * turningPointAddition * 2;
 
                 }
 
