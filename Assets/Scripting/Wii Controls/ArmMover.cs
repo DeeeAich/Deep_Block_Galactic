@@ -24,11 +24,11 @@ public class ArmMover : MonoBehaviour
     private void Start()
     {
 
-        originRotaion = changeTransform.transform.rotation;
+        originRotaion = changeTransform.transform.localRotation;
 
         WiimoteManager.FindWiimotes();
 
-        if (WiimoteManager.Wiimotes.Count > 2)
+        if (WiimoteManager.Wiimotes.Count > 1)
         {
             myMote = WiimoteManager.Wiimotes[rightMote ? 1 : 0];
 
@@ -42,6 +42,8 @@ public class ArmMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (myMote == null)
+            return;
 
         int ret = 0;
         do
@@ -55,13 +57,7 @@ public class ArmMover : MonoBehaviour
 
             Quaternion lookRotation = Quaternion.LookRotation(acceleration);
 
-            lookRotation = Quaternion.Euler(lookRotation.eulerAngles.x,
-                Mathf.Clamp(lookRotation.eulerAngles.y, -yMaxAngle, yMaxAngle),
-                    Mathf.Clamp(lookRotation.eulerAngles.z, -zMaxAngle, zMaxAngle));
-
-
-
-            changeTransform.rotation = originRotaion * lookRotation;
+            changeTransform.localRotation = lookRotation;
 
         } while (ret > 0);
     }
