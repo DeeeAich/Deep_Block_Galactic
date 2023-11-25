@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7007652260852478400}
   - component: {fileID: 5090432981504607498}
   m_Layer: 0
-  m_Name: Crystal_Green
+  m_Name: CrystalLight_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
