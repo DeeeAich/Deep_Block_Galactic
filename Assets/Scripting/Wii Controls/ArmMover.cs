@@ -12,6 +12,7 @@ public class ArmMover : MonoBehaviour
 
     [SerializeField] UnityEvent bDown;
     [SerializeField] UnityEvent bUp;
+    [SerializeField] UnityEvent aPress;
 
     [SerializeField] Transform changeTransform;
     [SerializeField] Quaternion originRotaion;
@@ -53,7 +54,7 @@ public class ArmMover : MonoBehaviour
 
             float[] accels = myMote.Accel.GetCalibratedAccelData();
 
-            Vector3 acceleration = (new Vector3(accels[0], accels[1], accels[2])).normalized;
+            Vector3 acceleration = (new Vector3(-accels[0], -accels[1], accels[2])).normalized;
 
             Quaternion lookRotation = Quaternion.LookRotation(acceleration);
 
@@ -87,6 +88,10 @@ public class ArmMover : MonoBehaviour
             myMote.SendStatusInfoRequest();
         }
 
+        if(myMote != null && myMote.Button.a)
+        {
+            aPress.Invoke();
+        }
     }
 
 }

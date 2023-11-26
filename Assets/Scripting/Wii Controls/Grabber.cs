@@ -25,7 +25,8 @@ public class Grabber : MonoBehaviour
 
             grabbedObject.PickUp();
 
-            grabbedObject.transform.position = grabLocation.transform.position;
+            grabbedObject.transform.position = grabLocation.position;
+            grabbedObject.transform.parent = grabLocation;
 
         }
     }
@@ -36,6 +37,8 @@ public class Grabber : MonoBehaviour
         if(grabbedObject != null)
         {
             grabbedObject.Drop();
+
+            grabbedObject.transform.parent = null;
 
             grabbedObject = null;
         }
@@ -54,7 +57,9 @@ public class Grabber : MonoBehaviour
 
             grabbedObject.Drop();
 
-            grabbedObject.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
+            grabbedObject.GetComponent<Rigidbody>().AddForce(-transform.forward * launchForce, ForceMode.Impulse);
+
+            grabbedObject.transform.parent = null;
 
             grabbedObject = null;
 
@@ -77,7 +82,7 @@ public class Grabber : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(!grabbed && other.TryGetComponent<Collectable>(out grabbedObject))
+        if(!grabbed && grabbedObject == other.TryGetComponent<Collectable>(out grabbedObject))
         {
             grabbedObject = null;
         }

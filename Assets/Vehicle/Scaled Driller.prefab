@@ -8350,7 +8350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 7889992897292651113}
   grabLocation: {fileID: 5628789386732677190}
-  launchForce: 10
+  launchForce: 4
 --- !u!65 &2123882951105613941
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8412,10 +8412,49 @@ MonoBehaviour:
   rightMote: 1
   bDown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 58858173673007347}
+        m_TargetAssemblyTypeName: Grabber, Assembly-CSharp
+        m_MethodName: StartGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   bUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 58858173673007347}
+        m_TargetAssemblyTypeName: Grabber, Assembly-CSharp
+        m_MethodName: EndGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  aPress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 58858173673007347}
+        m_TargetAssemblyTypeName: Grabber, Assembly-CSharp
+        m_MethodName: Launch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   changeTransform: {fileID: 3441999264390414178}
   originRotaion: {x: 0, y: 0, z: 0, w: 0}
   bPressed: 0
@@ -9751,8 +9790,35 @@ MonoBehaviour:
   rightMote: 0
   bDown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8789705957542850126}
+        m_TargetAssemblyTypeName: Drill, Assembly-CSharp
+        m_MethodName: DrillActivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   bUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8789705957542850126}
+        m_TargetAssemblyTypeName: Drill, Assembly-CSharp
+        m_MethodName: DrillShutdown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  aPress:
     m_PersistentCalls:
       m_Calls: []
   changeTransform: {fileID: 6398491653584308976}
