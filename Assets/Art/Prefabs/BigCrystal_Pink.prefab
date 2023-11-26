@@ -4963,6 +4963,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7737598855896604951}
   - component: {fileID: 2389198431324214472}
+  - component: {fileID: 8334058815844712578}
+  - component: {fileID: 1547981383337143297}
   m_Layer: 0
   m_Name: BigCrystal_Pink
   m_TagString: Untagged
@@ -5000,3 +5002,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.31, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8334058815844712578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757276952781773416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc364b34f3a04a7296733010052dc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 8
+  spawnObject: {fileID: 3856826656233320676, guid: 1f74ca70f0fbf7d4b987f4e5596273b5,
+    type: 3}
+  spawnAmount: 5
+  particles: {fileID: 5328734306050555383}
+--- !u!54 &1547981383337143297
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757276952781773416}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

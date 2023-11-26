@@ -7,9 +7,11 @@ public class Breakable : MonoBehaviour
 
     [SerializeField] float destroyTime;
 
-    [SerializeField] GameObject[] spawnObjects;
+    [SerializeField] GameObject spawnObject;
 
     [SerializeField] int spawnAmount;
+
+    public ParticleSystem particles;
 
     public void BreakObject()
     {
@@ -23,15 +25,19 @@ public class Breakable : MonoBehaviour
 
     private void Broken()
     {
-        GetComponent<Animator>().SetTrigger("Break");
 
         for(int cC = 0; cC < spawnAmount; cC++ )
         {
-            GameObject newCrystal = GameObject.Instantiate(spawnObjects[Random.Range(0, spawnObjects.Length - 1)], transform);
+            GameObject newCrystal = GameObject.Instantiate(spawnObject, transform.position, transform.rotation, null) ;
 
-            newCrystal.transform.parent = null;
         }
-        enabled = false;
+
+        transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+
+        particles.gameObject.SetActive(true);
+
+        Destroy(gameObject, 1f);
 
     }
 

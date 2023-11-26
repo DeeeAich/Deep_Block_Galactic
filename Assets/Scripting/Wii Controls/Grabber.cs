@@ -12,6 +12,8 @@ public class Grabber : MonoBehaviour
 
     [SerializeField] Transform grabLocation;
 
+    [SerializeField] float launchForce = 10f;
+
     public void StartGrab()
     {
         grabbed = true;
@@ -30,14 +32,39 @@ public class Grabber : MonoBehaviour
 
     public void EndGrab()
     {
+
+        if(grabbedObject != null)
+        {
+            grabbedObject.Drop();
+
+            grabbedObject = null;
+        }
+
         grabbed = false;
 
         anim.SetBool("Grabbed", grabbed);
+    }
+
+    public void Launch()
+    {
+
 
         if(grabbedObject != null)
         {
 
+            grabbedObject.Drop();
+
+            grabbedObject.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
+
+            grabbedObject = null;
+
         }
+
+
+        grabbed = false;
+
+        anim.SetBool("Grabbed", grabbed);
+
     }
 
     private void OnTriggerEnter(Collider other)

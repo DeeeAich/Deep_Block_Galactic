@@ -4963,6 +4963,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6524489279652973431}
   - component: {fileID: 36645757444615474}
+  - component: {fileID: 6602461566959893688}
+  - component: {fileID: 1390679015372834340}
   m_Layer: 0
   m_Name: BigCrystal_Green
   m_TagString: Untagged
@@ -5000,3 +5002,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.31, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6602461566959893688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354145876021948424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc364b34f3a04a7296733010052dc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 3
+  spawnObject: {fileID: 1271352842331369117, guid: 6a4f83b1d51a443409f7213a1e58fa88,
+    type: 3}
+  spawnAmount: 2
+  particles: {fileID: 267274240441466266}
+--- !u!54 &1390679015372834340
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354145876021948424}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
