@@ -432,6 +432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machine Body
       objectReference: {fileID: 0}
+    - target: {fileID: 6836873970119036434, guid: 5a9a842ad9f0fdf43b845ec1dfbf58cb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6836873970119036445, guid: 5a9a842ad9f0fdf43b845ec1dfbf58cb,
         type: 3}
       propertyPath: m_RootOrder
