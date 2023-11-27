@@ -253,12 +253,12 @@ MonoBehaviour:
   - {fileID: 6836873971961246175}
   - {fileID: 6836873971175586800}
   treadAnimation: []
-  speed: 15
+  speed: 7
   rotationSpeedMulti: 3
   maxSpeedTime: 2
   rightStick: 0
   leftStick: 0
-  turningPointAddition: 0.5
+  turningPointAddition: 0.2
 --- !u!1 &6836873971175586800
 GameObject:
   m_ObjectHideFlags: 0

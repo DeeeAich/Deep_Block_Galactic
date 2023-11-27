@@ -112,17 +112,14 @@ public class DriverControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A))
             leftTime = 0;
 
-
-        rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
-        leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
-
-        if(treadAnimation.Count == 2)
-        {
-            treadAnimation[1].speed = rightStick / speed;
-            treadAnimation[1].SetFloat("Rotation", rightStick);
-            treadAnimation[0].speed = leftStick / speed;
-            treadAnimation[0].SetFloat("Rotation", leftStick);
-        }
+        if(rightStick > 0 && rightStick < speed * Input.GetAxis("RightStick") -0.1f || rightStick < 0 && Input.GetAxis("RightStick") * speed + 0.1f < rightStick )
+            rightStick = Mathf.Lerp(rightStick, speed * Input.GetAxis("RightStick"), rightTime / maxSpeedTime);
+        else
+            rightStick = Input.GetAxis("RightStick") * speed;
+        if (leftStick > 0 && speed * Input.GetAxis("LeftStick") - 0.1f > leftStick || leftStick < 0 && speed * Input.GetAxis("LeftStick") + 0.1f < leftStick)
+            leftStick = Mathf.Lerp(leftStick, speed * Input.GetAxis("LeftStick"), leftTime / maxSpeedTime);
+        else
+            leftStick = speed * Input.GetAxis("LeftStick");
 
         rightTime += Time.deltaTime;
         leftTime += Time.deltaTime;
