@@ -15,17 +15,13 @@ public class ArmMover : MonoBehaviour
     [SerializeField] UnityEvent aPress;
 
     [SerializeField] Transform changeTransform;
-    [SerializeField] Quaternion originRotaion;
 
     [SerializeField] bool bPressed = false;
 
-    [SerializeField] float yMaxAngle = 45f;
-    [SerializeField] float zMaxAngle = 45f;
+    [SerializeField] float turnSpeed = 2f;
 
     private void Start()
     {
-
-        originRotaion = changeTransform.transform.localRotation;
 
         WiimoteManager.FindWiimotes();
 
@@ -36,6 +32,8 @@ public class ArmMover : MonoBehaviour
             myMote.SendPlayerLED(!rightMote, !rightMote, rightMote, rightMote);
 
             myMote.SendDataReportMode(InputDataType.REPORT_BUTTONS_ACCEL);
+
+            print("move connected" + (rightMote ? " right" : " left" ) + ". Battery status is " + myMote.Status.battery_low);
         }
         else
             print("Not enough remotes connected");
@@ -51,12 +49,12 @@ public class ArmMover : MonoBehaviour
         {
             ret = myMote.ReadWiimoteData();
 
-
             float[] accels = myMote.Accel.GetCalibratedAccelData();
 
             Vector3 acceleration = (new Vector3(-accels[0], -accels[1], accels[2])).normalized;
 
             Quaternion lookRotation = Quaternion.LookRotation(acceleration);
+
 
             changeTransform.localRotation = lookRotation;
 

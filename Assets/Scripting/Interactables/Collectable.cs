@@ -20,4 +20,18 @@ public class Collectable : MonoBehaviour
     {
         body.isKinematic = false;
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if(other.gameObject.name == "DropTrigger")
+        {
+
+            FindObjectOfType<GemCounter>().GemFound();
+
+            Destroy(gameObject);
+        }
+
+    }
 }

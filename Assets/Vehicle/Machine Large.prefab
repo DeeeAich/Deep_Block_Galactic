@@ -136,7 +136,7 @@ MonoBehaviour:
   - {fileID: 566372135157266677}
   treadAnimation: []
   speed: 7
-  rotationSpeedMulti: 3
+  rotationSpeedMulti: 5
   maxSpeedTime: 2
   rightStick: 0
   leftStick: 0

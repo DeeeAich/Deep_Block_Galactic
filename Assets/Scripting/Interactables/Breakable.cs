@@ -9,7 +9,7 @@ public class Breakable : MonoBehaviour
 
     [SerializeField] GameObject spawnObject;
 
-    [SerializeField] int spawnAmount;
+    public int spawnAmount;
 
     public ParticleSystem particles;
 
