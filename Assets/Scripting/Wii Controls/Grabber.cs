@@ -7,8 +7,8 @@ public class Grabber : MonoBehaviour
     [SerializeField] Animator anim;
 
     bool grabbed;
-
-    Collectable grabbedObject;
+    
+    [SerializeField] Collectable grabbedObject;
 
     [SerializeField] Transform grabLocation;
 
@@ -74,15 +74,15 @@ public class Grabber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!grabbed && other.TryGetComponent<Collectable>(out grabbedObject))
+        if(!grabbed && other.TryGetComponent<Collectable>(out Collectable collectable))
         {
-
+            grabbedObject = collectable;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(!grabbed && grabbedObject == other.TryGetComponent<Collectable>(out grabbedObject))
+        if(!grabbed && grabbedObject == other.TryGetComponent<Collectable>(out Collectable collectable))
         {
             grabbedObject = null;
         }
